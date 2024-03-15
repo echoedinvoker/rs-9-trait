@@ -11,16 +11,31 @@ struct _Rectangle {
     _color: String,
 }
 
+trait _OtherTrait {
+    fn some_other_method(&self);
+}
+trait _SomeOtherTrait {}
+
 trait _Draw {
     fn draw_object(&self);
 }
 
-trait _Shape: _Draw {
+trait _Shape: _Draw + _OtherTrait + _SomeOtherTrait {
     fn area(&self) -> f32;
     fn perimeter(&self) -> f32 {
         println!("Perimeter not implemented for this shape");
         0.0
     }
+}
+
+fn _shape_properties<T>(object: T)
+where
+    // T: _Shape + _OtherTrait + _SomeOtherTrait,
+    T: _Shape,
+{
+    object.area();
+    object.perimeter();
+    object.draw_object();
 }
 
 impl _Draw for _Square {
