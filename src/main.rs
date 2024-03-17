@@ -73,4 +73,17 @@ where
     object.perimeter();
 }
 
-fn main() {}
+fn main() {
+    let _r1 = _Rectangle {
+        _length: 10.0,
+        _width: 5.0,
+        _line_width: 2,
+        _color: String::from("Blue"),
+    };
+    let _s1 = _Square {
+        _side: 5.0,
+        _line_width: 3,
+        _color: String::from("Red"),
+    };
+    _shape_properties(_r1);
+}
