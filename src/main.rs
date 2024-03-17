@@ -65,10 +65,15 @@ fn _return_shape() -> impl _Shape {
     sq
 }
 
-fn _shape_properties<T>(object: T)
+fn _shape_properties_static<T>(object: T)
 where
     T: _Shape,
 {
+    object.area();
+    object.perimeter();
+}
+
+fn _shape_properties_dynamic(object: Box<dyn _Shape>) {
     object.area();
     object.perimeter();
 }
@@ -85,5 +90,6 @@ fn main() {
         _line_width: 3,
         _color: String::from("Red"),
     };
-    _shape_properties(_r1);
+    // _shape_properties(_r1);
+    _shape_properties_dynamic(Box::new(_r1));
 }
