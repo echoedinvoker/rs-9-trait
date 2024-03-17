@@ -56,13 +56,24 @@ impl _Shape for _Rectangle {
     }
 }
 
-fn _return_shape() -> impl _Shape {
-    let sq = _Square {
-        _side: 5.0,
-        _line_width: 3,
-        _color: String::from("Red"),
-    };
-    sq
+fn _return_shape(dimension: Vec<f32>) -> impl _Shape {
+    if dimension.len() == 1 {
+        let sq = _Square {
+            // _side: 5.0,
+            _side: dimension[0],
+            _line_width: 3,
+            _color: String::from("Red"),
+        };
+        sq
+    } else {
+        let rec = _Rectangle {
+            _length: dimension[0],
+            _width: dimension[1],
+            _line_width: 2,
+            _color: String::from("Blue"),
+        };
+        rec
+    }
 }
 
 fn _shape_properties_static<T>(object: T)
