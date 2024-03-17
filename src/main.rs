@@ -56,7 +56,8 @@ impl _Shape for _Rectangle {
     }
 }
 
-fn _return_shape(dimension: Vec<f32>) -> impl _Shape {
+// fn _return_shape(dimension: Vec<f32>) -> impl _Shape {
+fn _return_shape(dimension: Vec<f32>) -> Box<dyn _Shape> {
     if dimension.len() == 1 {
         let sq = _Square {
             // _side: 5.0,
@@ -64,7 +65,8 @@ fn _return_shape(dimension: Vec<f32>) -> impl _Shape {
             _line_width: 3,
             _color: String::from("Red"),
         };
-        sq
+        // sq
+        Box::new(sq)
     } else {
         let rec = _Rectangle {
             _length: dimension[0],
@@ -72,7 +74,8 @@ fn _return_shape(dimension: Vec<f32>) -> impl _Shape {
             _line_width: 2,
             _color: String::from("Blue"),
         };
-        rec
+        // rec
+        Box::new(rec)
     }
 }
 
