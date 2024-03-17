@@ -11,31 +11,16 @@ struct _Rectangle {
     _color: String,
 }
 
-trait _OtherTrait {
-    fn some_other_method(&self);
-}
-trait _SomeOtherTrait {}
-
 trait _Draw {
     fn draw_object(&self);
 }
 
-trait _Shape: _Draw + _OtherTrait + _SomeOtherTrait {
+trait _Shape: _Draw {
     fn area(&self) -> f32;
     fn perimeter(&self) -> f32 {
         println!("Perimeter not implemented for this shape");
         0.0
     }
-}
-
-fn _shape_properties<T>(object: T)
-where
-    // T: _Shape + _OtherTrait + _SomeOtherTrait,
-    T: _Shape,
-{
-    object.area();
-    object.perimeter();
-    object.draw_object();
 }
 
 impl _Draw for _Square {
@@ -69,6 +54,23 @@ impl _Shape for _Rectangle {
     fn perimeter(&self) -> f32 {
         2.0 * (self._length + self._width)
     }
+}
+
+fn _return_shape() -> impl _Shape {
+    let sq = _Square {
+        _side: 5.0,
+        _line_width: 3,
+        _color: String::from("Red"),
+    };
+    sq
+}
+
+fn _shape_properties<T>(object: T)
+where
+    T: _Shape,
+{
+    object.area();
+    object.perimeter();
 }
 
 fn main() {}
